@@ -3,7 +3,7 @@
 ##        Mod title:  Timelimit
 ##
 ##      Mod version:  1.0
-##  Works on FluxBB:  1.4
+##  Works on FluxBB:  1.5.11 et +
 ##     Release date:  2010-07-14
 ##      Review date:  YYYY-MM-DD (Leave unedited)
 ##           Author:  Visman (visman@inbox.ru)
@@ -11,7 +11,7 @@
 ##      Description:  Добавляет ограничение времени редактирования и удаление сообщений/тем пользователями.
 ##                    Adds restriction of time of editing and removal of messages / topics for users. 
 ##
-##   Repository URL:  http://fluxbb.org/resources/mods/xxx (Leave unedited)
+##   Repository URL:  https://github.com/Elementtair/Timelimit
 ##
 ##   Affected files:  viewtopic.php
 ##                    edit.php
@@ -20,7 +20,7 @@
 ##
 ##       Affects DB:  Yes
 ##
-##            Notes:  Russian/English
+##            Notes:  Russian/English/French
 ##
 ##       DISCLAIMER:  Please note that "mods" are not officially supported by
 ##                    FluxBB. Installation of this modification is done at 
