@@ -10,17 +10,22 @@
 if (!defined('PUN'))
 	exit;
 
-// Load the language file
-require PUN_ROOT.'lang/'.$admin_language.'/admin_plugin_timelimit.php';
-
 // Tell admin_loader.php that this is indeed a plugin and that it is loaded
 define('PUN_PLUGIN_LOADED', 1);
+define('PLUGIN_VERSION', '1.0.5');
+define('PLUGIN_URL', pun_htmlspecialchars('admin_loader.php?plugin='.$plugin));
+
+// Load language file
+if (file_exists(PUN_ROOT.'lang/'.$pun_user['language'].'/admin_plugin_timelimit.php'))
+	require PUN_ROOT.'lang/'.$pun_user['language'].'/admin_plugin_timelimit.php';
+else
+	require PUN_ROOT.'lang/English/admin_plugin_timelimit.php';
 
 // If the "Show text" button was clicked
 if (isset($_POST['show_text']))
 {
 
-	$g_order = array_map('trim', $_POST['g_order']);
+	$g_order = array_map('pun_trim', $_POST['g_order']);
 
 	$result = $db->query('SELECT g_id, g_title, g_deledit_interval FROM '.$db->prefix.'groups ORDER BY g_id') or error('Unable to fetch user group list', __FILE__, __LINE__, $db->error());
 
@@ -32,7 +37,7 @@ if (isset($_POST['show_text']))
         $db->query('UPDATE '.$db->prefix.'groups SET g_deledit_interval='.$g_time.' WHERE g_id='.$cur_group['g_id']) or error('Unable to update user group list', __FILE__, __LINE__, $db->error());
 			}
 
-	redirect(pun_htmlspecialchars('admin_loader.php?plugin=AP_Timelimit.php'), $lang_admin_plugin_timelimit['Plugin redirect']);
+	redirect(PLUGIN_URL, $lang_admin_plugin_timelimit['Plugin redirect']);
 
 }
 else
@@ -42,8 +47,8 @@ else
 
 
 ?>
-	<div id="exampleplugin" class="blockform">
-		<h2><span><?php echo $lang_admin_plugin_timelimit['Plugin title'] ?></span></h2>
+	<div class="plugin blockform">
+		<h2><span><?php echo $lang_admin_plugin_timelimit['Plugin title'].' v.'.PLUGIN_VERSION ?></span></h2>
 		<div class="box">
 			<div class="inbox">
 				<p><?php echo $lang_admin_plugin_timelimit['Explanation 1'] ?></p>
@@ -53,12 +58,12 @@ else
 
 		<h2 class="block2"><span><?php echo $lang_admin_plugin_timelimit['Form title'] ?></span></h2>
 		<div class="box">
-			<form id="example" method="post" action="<?php echo pun_htmlspecialchars($_SERVER['REQUEST_URI']) ?>&amp;foo=<?php echo time() ?>">
+			<form id="example" method="post" action="<?php echo PLUGIN_URL ?>">
 				<p class="submittop"><input type="submit" name="show_text" value="<?php echo $lang_admin_plugin_timelimit['Show text button'] ?>" tabindex="1" /></p>
 				<div class="inform">
 					<fieldset>
 						<div class="infldset">
-							<table class="aligntop" cellspacing="0">
+							<table class="aligntop">
 							<thead>
 								<tr>
 									<th class="tcl" scope="col"><?php echo $lang_admin_plugin_timelimit['Group'] ?></th>
